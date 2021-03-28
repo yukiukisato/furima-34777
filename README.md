@@ -30,8 +30,8 @@ has_many :histories
 | user  | references | foreign_key: true |
 
 ##Association
-belong_to :user
-belong_to :history
+belongs_to :user
+has_one :history
 
 
 ## buys テーブル
@@ -44,11 +44,10 @@ belong_to :history
 |address |  string         | null: false   |
 |building | string         | 
 |phone_number| string    | null: false   |
-|user|references| foreign_key: true |
-|item|references| foreign_key: true |
+|history| references | foreign_key: true |
 
 ##Association
-belong_to :history
+belongs_to :history
 
 ## histories テーブル
 
@@ -59,6 +58,6 @@ belong_to :history
 
 ##Association
 has_one :buy
-has_one :item
-belong_to :user
+belongs_to :item
+belongs_to :user
 
