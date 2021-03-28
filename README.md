@@ -5,7 +5,6 @@
 | nickname | string | null: false    |
 | email    | string | null: false  unique: true  |
 | encrypted_password | string | null: false    |
-|encrypted_password_reconfirmation| string | null: false|
 | last_name| string | null: false    |
 | first_name| string  | null: false   |
 |last_name_katakana| string | null: false|
@@ -14,7 +13,7 @@
 
 ##Association
 has_many :items
-has_many :historys
+has_many :histories
 
 ## items テーブル
 
@@ -24,12 +23,15 @@ has_many :historys
 | version |text| null: false   |
 | category_id| integer | null: false |
 | status_id | integer |null: false   |
-|price| string| null: false|
+|shipping_fee_burden_id |integer| null: false|
+|delivery_area_id |integer| null: false |
+|delivery_day_id| integer | null: false |
+|price| integer| null: false|
 | user  | references | foreign_key: true |
 
 ##Association
 belong_to :user
-has_many :historys
+has_many :histories
 has_one :listing
 
 
@@ -42,12 +44,12 @@ has_one :listing
 |municipality| string      | null: false   |
 |address |  string         | null: false   |
 |building | string         | 
-|phone_number| integer     | null: false   |
+|phone_number| string    | null: false   |
 
 ##Association
 belong_to :history
 
-## historys テーブル
+## histories テーブル
 
 | Column   | Type   | Options     |
 |----------|--------|-------------|
@@ -59,16 +61,3 @@ has_one :buy
 belong_to :item
 belong_to :user
 
-
-## listings テーブル
-
-| Column   | Type   | Options     |
-|----------|--------|-------------|
-|shipping_fee_burden_id |integer| null: false|
-|delivery_area_id |integer| null: false |
-|delivery_day_id| integer | null: false |
-|buy| references |foreign_key: true|
-
-
-##Association
-belongs_to :item
