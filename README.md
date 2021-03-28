@@ -31,8 +31,7 @@ has_many :histories
 
 ##Association
 belong_to :user
-has_many :histories
-has_one :listing
+belong_to :history
 
 
 ## buys テーブル
@@ -40,11 +39,13 @@ has_one :listing
 | Column   | Type   | Options     |
 |----------|--------|-------------|
 |postal_code | string    | null: false   |
-|prefectures | integer     | null: false   |
+| delivery_area_id| integer     | null: false   |
 |municipality| string      | null: false   |
 |address |  string         | null: false   |
 |building | string         | 
 |phone_number| string    | null: false   |
+|user|references| foreign_key: true |
+|item|references| foreign_key: true |
 
 ##Association
 belong_to :history
@@ -58,6 +59,6 @@ belong_to :history
 
 ##Association
 has_one :buy
-belong_to :item
+has_one :item
 belong_to :user
 
