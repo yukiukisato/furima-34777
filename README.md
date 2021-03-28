@@ -2,53 +2,76 @@
 
 | Column   | Type   | Options     |
 | -------- | ------ | ----------- |
-| nickname | string | NOT NULL    |
-| email    | string | NOT NULL    |
-| password | string | NOT NULL    |
-| last_name| string | NOT NULL    |
-| first_name| string  | NOT NUlL    |
-| birthday | date  | NOT NULL    |
+| nickname | string | null: false    |
+| email    | string | null: false    |
+| password | string | null: false    |
+|password_reconfirmation| string | null: false|
+| last_name| string | null: false    |
+| first_name| string  | null: false   |
+|last_name_katakana| string | null: false|
+|first_name_katakana| string | null: false |
+| birthday | date  | null: false    |
 
 ##Association
 has_many :items
 belong_to :buy
-
+has_many :items, thorough: :historys
 
 ## items テーブル
 
 | Column | Type   | Options     |
 | ------ | ------ | ----------- |
-| image  |ActiveStorageで実装|
-| item_name | string | NOT NULL    |
-| item_version |text| NOT NULL    |
-| category| integer | NOT NULL      |
-| status | integer |NOT NULL    |
-|shipping_fee_burden |integer| NOT NULL|
-|delivery_area |integer| NOT NULL |
-|delivery_day| integer | NOT NULL |
-|price| string| NOT NULL|
-| user   | references |
+| name | string | null: false    |
+| version |text| null: false   |
+| category| integer | null: false |
+| status | integer |null: false   |
+|price| string| null: false|
+| user_id  | references | foreign_key: true |
 
 ##Association
 belong_to :user
 belong_to :buy
+has_many :users, through: :historys
 
 ## buys テーブル
 
 | Column   | Type   | Options     |
 |----------|--------|-------------|
-| card_number   | integer  | NOT NULL    |
-|expiration_date| integer  | NOT NULL    |
-|security_code| integer    | NOT NULL    |
-|postal_code | integer     | NOT NULL    |
-|prefectures | integer     | NOT NULL    |
-|municipality| string      | NOT NULL    |
-|address |  string         | NOT NULL    |
-|building | string         | NOT NULL    |
-|phone_number| integer     | NOT NULL    |
-| user     | references |
-| item| references |
+|postal_code | integer     | null: false   |
+|prefectures | integer     | null: false   |
+|municipality| string      | null: false   |
+|address |  string         | null: false   |
+|building | string         | null: false   |
+|phone_number| integer     | null: false   |
+| user_id    | references |foreign_key: true |
+| item_id    | references |foreign_key: true |
 
 ##Association
-belong_to :item
-belong_to :user
+has_one :item
+has_one :user
+has_one :listing
+
+## historys テーブル
+
+| Column   | Type   | Options     |
+|----------|--------|-------------|
+|item_id | references | foreign_key: true  |
+|user_id | references | foreign_key: true  |
+
+##Association
+belongs_to :user
+belongs_to :item
+
+
+## listings テーブル
+
+| Column   | Type   | Options     |
+|----------|--------|-------------|
+|shipping_fee_burden |integer| null: false|
+|delivery_area |integer| null: false |
+|delivery_day| integer | null: false |
+|buy_id| references |foreign_key: true|
+
+
+##Association
+belongs_to :user
