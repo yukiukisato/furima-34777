@@ -4,10 +4,7 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
-<<<<<<< HEAD
-require("turbolinks").start()
-=======
->>>>>>> origin/master
+// require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 
