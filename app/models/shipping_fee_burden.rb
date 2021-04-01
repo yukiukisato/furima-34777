@@ -1,0 +1,1 @@
+class Shipping_fee_burden < ActiveHash::Base
