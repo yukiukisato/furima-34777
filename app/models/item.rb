@@ -4,6 +4,7 @@ class Item < ApplicationRecord
     validates :version
     validates :price
     validates :image
+    validates :user_id
   end
   validates :category_id, numericality: { other_than: 1 }
   validates :status_id, numericality: { other_than: 1 }
