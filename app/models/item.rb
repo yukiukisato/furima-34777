@@ -9,12 +9,14 @@ class Item < ApplicationRecord
 
   validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is invalid"}
 
+  with_options  numericality: { other_than: 1 } do
+  validates :category_id
+  validates :status_id
+  validates :shipping_fee_burden_id
+  validates :delivery_area_id
+  validates :delivery_day_id
+  end
 
-  validates :category_id, numericality: { other_than: 1 }
-  validates :status_id, numericality: { other_than: 1 }
-  validates :shipping_fee_burden_id, numericality: { other_than: 1 }
-  validates :delivery_area_id, numericality: { other_than: 1 }
-  validates :delivery_day_id, numericality: { other_than: 1 }
   
   belongs_to :user
   has_one :histry
