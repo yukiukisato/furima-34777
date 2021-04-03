@@ -43,7 +43,7 @@ RSpec.describe Item, type: :model do
         end
 
         it 'カテゴリーが1では登録できない' do
-          @item.category_id = '1'
+          @item.category_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include "Category must be other than 1"
         end
@@ -55,7 +55,7 @@ RSpec.describe Item, type: :model do
         end
 
         it '商品の状態が1では登録できない' do
-          @item.status_id = '1'
+          @item.status_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include"Status must be other than 1"
         end
@@ -67,7 +67,7 @@ RSpec.describe Item, type: :model do
         end
 
         it '配送料が1では登録できない' do
-          @item.shipping_fee_burden_id = '1'
+          @item.shipping_fee_burden_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include"Shipping fee burden must be other than 1"
         end
@@ -79,7 +79,7 @@ RSpec.describe Item, type: :model do
         end
 
         it '配達エリアが1では登録できない' do
-          @item.delivery_area_id = '1'
+          @item.delivery_area_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include"Delivery area is not a number"
         end
@@ -91,7 +91,7 @@ RSpec.describe Item, type: :model do
         end
 
         it '配達日が1では登録できない' do
-          @item.delivery_day_id = '1'
+          @item.delivery_day_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include "Delivery day must be other than 1"
         end
@@ -121,13 +121,13 @@ RSpec.describe Item, type: :model do
         end
 
         it '金額が299円以下では登録できない' do
-          @item.price = '210'
+          @item.price = 210
           @item.valid?
           expect(@item.errors.full_messages).to include "Price is invalid"
         end
 
         it '金額が10,000,000円以上では登録できない' do
-          @item.price = '500000000000'
+          @item.price = 500000000000
           @item.valid?
           expect(@item.errors.full_messages).to include "Price is invalid"
         end
