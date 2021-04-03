@@ -4,7 +4,6 @@ class Item < ApplicationRecord
     validates :version
     
     validates :image
-    validates :user_id
   end
 
   validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is invalid"}
@@ -17,7 +16,7 @@ class Item < ApplicationRecord
   validates :delivery_day_id
   end
 
-  
+
   belongs_to :user
   has_one :histry
   has_one_attached :image
