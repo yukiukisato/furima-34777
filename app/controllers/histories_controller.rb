@@ -3,8 +3,6 @@ class HistoriesController < ApplicationController
     @history_buy = HistoryBuy.new
   end
 
-  def new
-  end
 
   def create
     @history_buy = HistoryBuy.new(history_params)
@@ -12,7 +10,7 @@ class HistoriesController < ApplicationController
       @history_buy.save
       redirect_to root_path
     else
-      render :new
+      render :index
     end
   end
 

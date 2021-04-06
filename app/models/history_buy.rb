@@ -4,12 +4,13 @@ class HistoryBuy
 
   # ここにバリデーションの処理を書く
   with_options presence: true do
-    validates :postal_code
-    validates :delivery_area_id
+    validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
+    validates :delivery_area_id, numericality: {other_than: 0, message: "can't be blank"}
     validates :municipality
     validates :address
-    validates :phone_number
+    validates :phone_number, format: { with: /\A\d{11}\z/ }
   end
+  
 
   def save
     # 各テーブルにデータを保存する処理を書く
