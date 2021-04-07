@@ -1,6 +1,7 @@
 class HistoriesController < ApplicationController
   def index
     @history_buy = HistoryBuy.new
+    @item = Item.find(params[:item_id])
   end
 
 
