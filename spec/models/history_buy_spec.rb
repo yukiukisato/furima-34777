@@ -2,12 +2,20 @@ require 'rails_helper'
 
 RSpec.describe HistoryBuy, type: :model do
   before do
-    @history_buy = FactoryBot.build(:history_buy)
+    user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item, user_id: user.id )
+    @history_buy = FactoryBot.build(:history_buy, user_id: user.id , item_id: @item.id)
+    sleep 0.1 
   end
 
   describe '商品購入' do
     context '商品が購入できる時' do
       it '入力に不備がない時' do
+        expect(@history_buy).to be_valid
+      end
+
+      it'建物名が空でも' do
+        @history_buy.building = ''
         expect(@history_buy).to be_valid
       end
     end
@@ -46,6 +54,12 @@ RSpec.describe HistoryBuy, type: :model do
       @history_buy.phone_number = ''
       @history_buy.valid?
       expect(@history_buy.errors.full_messages).to include "Phone number can't be blank"
+      end
+
+      it '電話番号は英数字混合のとき' do
+        @history_buy.phone_number = '1234abcd'
+        @history_buy.valid?
+        expect(@history_buy.errors.full_messages).to include'Phone number is invalid'
       end
 
       it '電話番号が11桁の数値意外の時' do

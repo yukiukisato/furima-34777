@@ -1,6 +1,6 @@
 class HistoryBuy
   include ActiveModel::Model
-  attr_accessor :postal_code,:delivery_area_id,:municipality,:address,:building,:phone_number,:user_id,:buy_id,:item_id,:token
+  attr_accessor :postal_code,:delivery_area_id,:municipality,:address,:building,:phone_number,:user_id,:item_id,:token
 
   # ここにバリデーションの処理を書く
   with_options presence: true do
@@ -10,6 +10,8 @@ class HistoryBuy
     validates :address
     validates :phone_number, format: { with: /\A\d{11}\z/ }
     validates :token
+    validates :user_id
+    validates :item_id
   end
   
 

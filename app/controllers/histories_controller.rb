@@ -1,13 +1,15 @@
 class HistoriesController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :create]
+  before_action :set_item, only: [:index, :create]
+  before_action :move_to_index, only: [:index, :create]
+
   def index
     @history_buy = HistoryBuy.new
-    @item = Item.find(params[:item_id])
   end
 
 
   def create
     @history_buy = HistoryBuy.new(history_params)
-    @item = Item.find(params[:item_id])
     if  @history_buy.valid?
       pay_item
      
@@ -35,5 +37,15 @@ class HistoriesController < ApplicationController
     )
     
   end
+  def move_to_index
+    if  current_user.id == @item.user_id || @item.history.present?
+      redirect_to  items_path
+    end
+  end
+  
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
 end
   
