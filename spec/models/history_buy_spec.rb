@@ -9,7 +9,6 @@ RSpec.describe HistoryBuy, type: :model do
     context '商品が購入できる時' do
       it '入力に不備がない時' do
         expect(@history_buy).to be_valid
-
       end
     end
     context '商品が購入できないとき' do
@@ -53,8 +52,13 @@ RSpec.describe HistoryBuy, type: :model do
         @history_buy.phone_number = '1234abcd'
         @history_buy.valid?
         expect(@history_buy.errors.full_messages).to include "Phone number is invalid"
-        end
+      end
 
+      it "tokenが空では登録できないこと" do
+        @history_buy.token = nil
+        @history_buy.valid?
+        expect(@history_buy.errors.full_messages).to include("Token can't be blank")
+      end
     end
   end
 end
