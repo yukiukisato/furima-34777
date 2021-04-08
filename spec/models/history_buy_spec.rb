@@ -62,14 +62,14 @@ RSpec.describe HistoryBuy, type: :model do
       expect(@history_buy.errors.full_messages).to include "Phone number can't be blank"
       end
 
-      it '電話番号は英数字混合のとき' do
-        @history_buy.phone_number = '1234abcd'
-        @history_buy.valid?
-        expect(@history_buy.errors.full_messages).to include'Phone number is invalid'
-      end
-
       it '電話番号が11桁の数値意外の時' do
         @history_buy.phone_number = '1234abcd'
+        @history_buy.valid?
+        expect(@history_buy.errors.full_messages).to include "Phone number is invalid"
+      end
+
+      it '電話番号が12桁以上の時' do
+        @history_buy.phone_number = '1234567891234'
         @history_buy.valid?
         expect(@history_buy.errors.full_messages).to include "Phone number is invalid"
       end
