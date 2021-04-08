@@ -38,6 +38,12 @@ RSpec.describe HistoryBuy, type: :model do
       expect(@history_buy.errors.full_messages).to include "Delivery area can't be blank"
       end
 
+      it'配達地域が１の時' do
+      @history_buy.delivery_area_id = 1
+      @history_buy.valid?
+      expect(@history_buy.errors.full_messages).to include "Delivery area can't be blank"
+      end
+
       it '市区町村が空のとき' do
       @history_buy.municipality = ''
       @history_buy.valid?
@@ -71,8 +77,23 @@ RSpec.describe HistoryBuy, type: :model do
       it "tokenが空では登録できないこと" do
         @history_buy.token = nil
         @history_buy.valid?
-        expect(@history_buy.errors.full_messages).to include("Token can't be blank")
+        expect(@history_buy.errors.full_messages).to include"Token can't be blank"
       end
+
+      it "use_idがない時" do
+        @history_buy.user_id = nil
+        @history_buy.valid?
+        expect(@history_buy.errors.full_messages).to include "User can't be blank"
+      end
+
+      it "item_idがない時" do
+        @history_buy.item_id = nil
+        @history_buy.valid?
+        expect(@history_buy.errors.full_messages).to include "Item can't be blank"
+      end
+
+
+
     end
   end
 end
