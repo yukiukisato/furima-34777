@@ -49,7 +49,7 @@ class ItemsController < ApplicationController
 
   def move_to_index
     
-    if user_signed_in? && current_user.id != @item.user.id
+    if  current_user.id != @item.user.id || @item.history.present?
       redirect_to action: :index
     end
   end
